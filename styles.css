@@ -1,0 +1,15 @@
+.replace {
+  color: "#FD7E14";
+  font-style: italic;
+}
+
+.code-block {
+  background-color: #eee;
+  border: 1px solid gray;
+  border-radius: 5px;
+  font-family: "JetBrains Mono", "Courier New", Courier, monospace;
+  padding: 5px;
+  white-space: pre-wrap;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,144 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won’t be available)
+
+// Then add additional custom code here
+
+.custom-code-block {
+  background-color: #2d2d2d; /* Dark background for the code block */
+  color: #f8f8f2; /* Light text color for contrast */
+  padding: 15px; /* Add padding inside the code block */
+  border-radius: 5px; /* Rounded corners */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+  font-size: 0.9rem; /* Adjust font size */
+  overflow-x: auto; /* Enable horizontal scrolling for long lines */
+  border: 1px solid #444; /* Optional: Add a border for better visibility */
+  text-align: left; /* Align text to the left */
+}
+
+.custom-code-block code {
+  color: #f8f8f2; /* Ensure code text is readable */
+  white-space: pre-wrap; /* Preserve formatting and allow wrapping */
+}
+
+.inline-code {
+  background-color: #222222; /* Light gray background for contrast */
+  color: #0091ca; /* Highlighted text color */
+  font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+  padding: 2px 4px; /* Add some padding around the text */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 0.95rem; /* Slightly smaller font size */
+}
+
+// Custom.scss
+// Update your header styles to include the gradient correctly
+
+header {
+  padding: 20px; /* Adjust padding as needed */
+  background: #212529ee;
+  background-image: linear-gradient(180deg, #212529 0%, rgba(0, 55, 175, 0.705) 100%);
+  background-clip: padding-box; /* Apply gradient to the padding area */
+  
+  &::after {
+    content: "";
+    display: block;
+    height: 2px; // Reduced from 10px to be more subtle
+    background-color: rgba(6, 176, 255, 0.5); // Change to a blue tint to match gradient
+  }
+}
+
+header.navbar {
+  --bs-navbar-padding-y: 0;
+}
+
+// Your walkthrough-header class has a gradient but it might not be applied to your navbar
+.walkthrough-header {
+  background: #212529;
+  background: linear-gradient(180deg, rgba(33, 37, 41, 0) 0%, #00e1ff88 100%);
+}
+
+
+/* Or for a specific element */
+#aboutMe {
+  scroll-margin-top: 110px; /* Adjust value to match your navbar height */
+}
+
+
+.fade-in-container {
+  opacity: 0;
+  animation: fadeInContainer 1s forwards;
+}
+
+.fade-in-text {
+  opacity: 0;
+  animation: fadeInText 2s forwards;
+  animation-delay: 1s; /* Delays text fade-in until container fades in */
+}
+
+@keyframes fadeInContainer {
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInText {
+  to {
+      opacity: 1;
+  }
+}
+
+footer.blockquote-footer {
+  padding-bottom: 0; /* Removes padding from the bottom border */
+  padding: 20px; /* Match the header padding */
+  background: linear-gradient(180deg, rgba(33, 37, 41, 0) 0%, rgba(6, 176, 255, 0.637) 100%); /* Same gradient as header */
+  background-clip: padding-box; /* Ensure gradient applies only to the padding area */
+  border-top: 2px solid #212529; /* Optional: Add a border to match the header's bottom margin color */
+}
+
+#pageFooter {
+  margin-bottom: 0px !important;
+  padding-bottom: 0; /* Removes padding from the bottom border */
+  padding: 20px; /* Match the header padding */
+  background: linear-gradient(180deg, rgba(33, 37, 41, 0) 0%, rgba(16, 96, 177, 0.96) 100%); /* Same gradient as header */
+  background-clip: padding-box; /* Ensure gradient applies only to the padding area */
+}
+
+code {
+  color: #ffffff !important;
+}
+
+dd {
+  text-align: end;
+}
+// .prerequisites {}
+//.steps {}
+
+.vr {
+  background-color: #6c757d; /* Custom color */
+  border-radius: 50px; /* Optional: Add rounded edges */
+}
+
+.hazard-diamond-container {
+    place-self: center;
+}
+
+.title-header {
+  margin-bottom: 2rem !important;
+}
+
+.testimonial-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.quote-mark {
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 0;
+}
+
+.testimonial-image {
+  min-width: 60px;
+}

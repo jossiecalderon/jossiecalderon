@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark">
+
+  <head>
+    <!--Universal character set-->
+    <meta charset="utf-8">
+
+    <!--Mobile viewing-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Compiled from custom.scss Sass file-->
+    <link rel="stylesheet" href="/html/styles.css">
+
+    <!--Web Page Functionality-->
+    <script src="/html/functions.js" type="module"></script>
+
+    <!--Bootstrap-->
+    <script src="/html/script.js" type="module" async></script>
+
+    <!--Input Cleansing-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
+
+    <!--EmailJS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!--GA4-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7PXPJBGXH1"></script>
+
+    <!--Title-->
+    <title>Cloud Analyst Go: Master Cloud Computing, Build Your Own Technology, and Secure Technological Independence</title>
+  </head>
+
+  <body>
+
+    <!--Bootstrap elements such as these will have to be updated programatically via JS.-->
+    <!--Otherwise this navbar must be copied and pasted in pages.-->
+    <header class="navbar navbar-expand-lg pb-1 mb-4 sticky-top">
+      <nav class="container-fluid" aria-label="Main navigation">
+        <div class="d-flex align-items-center">
+          <a class="navbar-brand p-0 me-0 me-lg-2" href="/">
+            <img src="../favicons/cloudanalyst-logo-106x96-blue-outline.png" alt="CloudAnalystGo">
+          </a>
+          <div class="d-flex flex-column align-items-center">
+            <h4>Cloud Analyst Go</h4>
+            <p class="mb-0">Future-Proof Your Skills</p>
+          </div>
+        </div>
+        
+        <!-- Hamburger button - correctly targeting the collapse div -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarContent" aria-controls="navbarContent" 
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- This div will collapse on small screens -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#aboutMe">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="servicesButton">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="projectsButton">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactModal" href="#" role="button">Contact</a>
+            </li>
+          </ul>
+          
+          <!-- Theme and subscription controls -->
+          <div class="d-flex align-items-center">
+            <button class="btn btn-link nav-link m-4 d-flex align-items-center border-secondary-subtle" id="theme-select" type="button">
+              <svg class="bi bi-moon-stars theme-icon-active" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <use href="#moon-stars-fill"></use>
+              </svg>
+            </button>
+            <div class="d-inline-flex">
+              <input type="text" class="form-control" placeholder="example@domain.com" aria-label="Subscribe" id="emailSubscriptionInput">
+              <button class="btn btn-outline-success" type="submit">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <!--SVG symbols-->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" id="theme-icons">
+        <!-- Symbol definitions -->
+        <symbol id="moon-stars-fill" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+        </symbol>
+        <symbol id="sun-fill" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+        </symbol>
+      </svg>
+    </header>
+
+    <!--To be created programatically and read this element from another file.-->
+    <main class="container-fluid col-md-8 mx-auto p-5" id="create-a-web-server-page">
+
+      <div class="p-4 p-md-5 mb-4 row rounded text-body-emphasis align-items-center bg-body-secondary">
+        <div class="col-lg-6 border-start border-info ps-4 border-4">
+          <div class="container-fluid px-0">
+            <h1 class="display-3 pb-3 border-4 border-bottom title-header">
+              Create and Deploy an Azure Virtual Machine (VM)
+            </h1>
+          </div>
+          <div class="container-fluid px-0">
+            <p class="lead my-3 fst-italic">
+              Create a virtual machine on the cloud, learn cloud resource deployment and begin your cloud journey.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 shadow text-start">
+          <figure class="figure">
+            <img src="/img/deploying-a-vm.png"  class='img-fluid' alt="Deploying a VM." height="440" width="600">
+            <figcaption class="figure-caption mt-3"><span>Deploying a VM.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+    <div class="p-4 pb-2 mb-4 row rounded text-body-emphasis">
+      <div class="col-lg-6">
+
+        <div class="prerequisites border-bottom my-0 p-4 border-info">
+          <h4 class="display-5 text-center">Prerequisites</h4>
+          <dl class="row">
+            <dt class="col-sm-6">Skills</dt>
+            <dd class="col-sm-6">Use the internet</dd>
+          
+            <dt class="col-sm-6">Items</dt>
+            <dd class="col-sm-6">
+              <p>1 Microsoft Account (Outlook, Hotmail, etc.)</p>
+            </dd>
+          
+            <dt class="col-sm-6">Completed</dt>
+            <dd class="col-sm-6">
+              <p><a href="https://signup.live.com/" target="_blank">Create a Microsoft Account</a></p>
+            </dd>
+          
+            <dt class="col-sm-6">Other</dt>
+            <dd class="col-sm-6">
+              <p>Free $200 Azure Credit (included when you <a href="https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account" target="_blank">sign up for Azure</a>)</p>
+            </dd>
+          </dl>
+        </div>
+        <div class="container-fluid px-0 py-4 text-center align-items-center border-top border-info">
+          <h4 class="display-6 text-center">Start Point</h4>
+          <p class="lead">The Azure Portal</p>
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-link border d-flex align-items-center" id="azurePortal" type="button" aria-label="Azure Portal">
+              <a class="" href="https://portal.azure.com/#home" target="_blank"><img src="/azure-long-logo.svg" width="64" height="64"></a>
+            </button>
+            <!--<button class="btn btn-link border d-flex align-items-center" id="awsPortal" type="button" aria-label="Azure Portal">
+              <a class="" href="https://console.aws.amazon.com/console/home" target="_blank"><img src="/aws-logo.png" width="64" height="64"></a>
+            </button>-->
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 border-end border-info">
+      </div>
+      <div class="col-lg-5 text-center px-0 hazard-diamond-container" id="hazardDiamondContainer">
+        <figure class="figure">
+          <img src="/hazard-diamond-1010.png" class="img-fluid" alt="Hazard 1010" width="250" height="250">
+          <figcaption class="figure-caption"><span>This project is rated <span class="text-success fw-bold">easy</span> on the Project Hazard scale.</span>
+            <p class="text-start"><a href="/html/project-hazard-scale.html" class="text-body-secondary">
+              (What's this?)
+            </a></p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+      
+    <div class="container-fluid steps">
+      <div class="p-1 mb-5 bg-opacity-10 border-bottom rounded-pill">
+        <h1 class="display-5 text-center walkthrough-header p-3 rounded-pill">Walkthrough</h1>
+      </div>
+
+      <h3>1. Navigate into the Portal</h3>
+  
+      <div class="ps-4"> <!-- ps-4 adds padding-left equivalent to around 1.5rem -->
+
+        <p class="mb-3">
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="You may also receive an MFA prompt: Due to the advent of black hats (hackers) nowadays, it is strongly recommended to set this up, as it's also easy and won't take long.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+          Log in to the portal using your username and password.
+        </p>
+      </div>
+
+      <h3>2. Create a VM</h3>
+
+      <div class="ps-4">
+        <p>1. On the top-left, click <span class="text-primary p-1 border shadow">+</span> to create a resource.</p>
+
+        <p>2. A list appears. Look for and click on Virtual Machine.</p>
+        <p>3. Complete the Basics settings only. Even most of the settings in the Basics page can be skipped except the mandatory ones:</p>
+        <!-- Define the SVG symbol once -->
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol id="info-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+          </symbol>
+        </svg>
+
+        <div class="mb-4">
+          <p class="mb-3">
+            <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="A container that organizes your Azure resources (VM, IP, storage, other network settings, etc.) in one place for easier management">
+              <svg width="16" height="16" fill="#00e1ff88">
+                <use href="#info-circle"></use>
+              </svg>
+            </span>
+            <span class="fw-bold">Resource group</span>: Give it any name.
+          </p>
+          
+          <p class="mb-3">
+            <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="This is one of many identifiers for your VM. It's also the easiest to remember.">
+              <svg width="16" height="16" fill="#00e1ff88">
+                <use href="#info-circle"></use>
+              </svg>
+            </span>
+            <span class="fw-bold">VM Name</span>: Pick a nice name.
+          </p>
+          
+          <p class="mb-3">
+            <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="Each AZ is made up of one or more datacenters equipped with independent power, cooling, and networking.">
+              <svg width="16" height="16" fill="#00e1ff88">
+                <use href="#info-circle"></use>
+              </svg>
+            </span>
+            <span class="fw-bold">Availability Zone (AZ)</span>: <span class="text-info">Change this if you receive a zone-related error</span>. Otherwise, leave it as is.
+          </p>
+
+          <p class="mb-3">
+            <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="An image is a template used to create a VM. It contains the operating system, binaries, and other software.">
+              <svg width="16" height="16" fill="#00e1ff88">
+                <use href="#info-circle"></use>
+              </svg>
+            </span>
+            <span class="fw-bold">Image</span>: Select "See all images". On the top-left, select "Community Marketplace". Search for "fedora-cloud-42". Scroll to the titles suffixed with "-x64". Select the location closest to your network.
+          </p>
+
+          <div class="text-center">
+            <figure class="figure mx-auto">
+              <img src="/img/img-of-images.png" class='img-fluid border border-4 rounded border-info-subtle' alt="Selecting an image.">
+              <figcaption class="figure-caption mt-3"><span>Selecting an image.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <p class="mb-3">
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="The size of the VM determines its performance and cost.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+          <span class="fw-bold">Size</span>: This is a mandatory setting with a default value of B1s, a free-tier VM. <span class="text-warning">Do not change this setting or your Azure credits will be used.</span> If you receive an error, change the AZ instead.
+        </p>
+
+        <p class="mb-3">
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="This is the method used to access the VM.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+          <span class="fw-bold">Authentication type</span>: Make sure it's set to SSH public key. (This is the default setting.)
+        </p>
+
+        <p class="mb-3">
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="The username is an identifier for the user.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+          <span class="fw-bold">Username</span>: My favorite part. Pick your favorite token for logging into the VM.
+        </p>
+
+        <p class="mb-3">
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="A port is an access point into your VM.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+          <span class="fw-bold">Select inbound ports</span>: Select SSH. <a href="/html/create-a-web-server.html" target="_blank">If you intend to develop this VM into a web server, select HTTP and HTTPS as well.</a>
+        </p>
+
+        <div class="text-center">
+          <div class="alert alert-warning d-inline-block m-4 p-4" role="alert">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+              <div>
+                If you selected HTTP and HTTPS ports in the last step, your Azure credits will be used <a id="azureIPCreditWarning" href="https://azure.microsoft.com/en-us/pricing/details/ip-addresses/" target="_blank" class="alert-link">at a rate of less than half a cent per hour</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>3. Click the Review + create button. Azure will validate the VM's settings. After 1-2 minutes, a summary page appears. Click the Create button. A pop-up appears.</p>
+
+        <div class="text-center">
+          <figure class="figure mx-auto">
+            <img src="/img/generate-kp.png" class='img-fluid border border-4 rounded border-info-subtle' alt="Generating a private key.">
+            <figcaption class="figure-caption mt-3"><span>Generating a private key.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p>4. As noted in the image, <span class="fw-bold">Azure doesn't store the Private Key.</span> This is your authentication token. It is like a password and a physical house/car key, but better: It is virtually impossible to replicate, and you don't have to remember its contents. Download it, store it in a safe folder and right-click it. Copy its path and paste it onto Notepad: You will need this later.</p>
+
+        <div class="text-center">
+          <figure class="figure mx-auto">
+            <img src="/img/copy-as-path.png" class='img-fluid border border-4 rounded border-info-subtle' alt="Copying a file as path.">
+            <figcaption class="figure-caption mt-3"><span>Copying a file as path.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="text-center">
+          <div class="alert alert-danger d-inline-block m-4 p-4" role="alert">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-octagon-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353L11.46.146zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+              </svg>
+              <div>
+                  If you lose your Private Key, you will be unable to log into the VM.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>5. Azure is now allocating the hardware resources for your VM in their datacenters. The deployment or provisioning process for the VM takes between two to three minutes, so check back in five minutes for the next step.</p>
+
+      </div>
+
+        <h3>3. Log in to your VM</h3>
+  
+        <div class="ps-4"> <!-- ps-4 adds padding-left equivalent to around 1.5rem -->
+          <p>1. Connect via SSH into your VM. You will need:</p>
+          <ul>
+            <li id="instructionsVMIP">Your VM's IP address</li>
+            <li>Your key pair</li>
+          </ul>
+
+        <!-- Button to trigger modal -->
+        <button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#sshModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-question-circle-fill ms-1" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+          </svg>
+          Confused about SSH?
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="sshModal" tabindex="-1" aria-labelledby="sshModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sshModalLabel">Understanding SSH Protocol</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p>The SSH protocol for connecting to a VM follows a format that's easy to remember:</p>
+                    <div class="bg-secondary text-light p-3 m-3 rounded">
+                        <div class="row align-items-center">
+                            <div class="col-auto user-select-none fs-5 text-dark fw-bold pe-3">
+                                &gt;
+                            </div>
+                            <div class="col">
+                                <code>
+                                    ssh -i 
+                                    <span class="text-warning-emphasis">private-key.pem</span> 
+                                    <span class="text-info-emphasis">username</span>@<span class="text-success-emphasis">ip-address</span>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>The "minus" before a letter signals the start of an option. Here, <code>-i</code> is the identity option that communicates to the terminal, "<span class="text-warning-emphasis">private-key.pem</span> is the identification token for the user <span class="text-info-emphasis">username</span>."</p>
+
+                    <div class="text-center">
+                        <figure class="figure mx-auto">
+                            <img src="/img/ssh-connection.png" class='img-fluid border border-2 rounded border-info-subtle' alt="Connecting to the VM via SSH.">
+                            <figcaption class="figure-caption mt-3">
+                                <span>Connecting to the VM via SSH. Note the change in command prompt symbol from PowerShell's <code>&gt;</code> to Linux's <code>$</code>.</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <p>In essence, "Use SSH with the identity token <span class="text-warning-emphasis">private-key.pem</span> for <span class="text-info-emphasis">username</span> located at <span class="text-success-emphasis">ip-address</span>."</p>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <p class="mb-3">
+          2. Type <code>yes</code> when you are prompted for the authenticity of the server.
+          <span class="d-inline-block me-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" title="The server shows you its unique signature (called a fingerprint), which is generated using the ED25519 algorithm. This is a universal identifier of the server.">
+            <svg width="16" height="16" fill="#00e1ff88">
+              <use href="#info-circle"></use>
+            </svg>
+          </span>
+        </p>
+
+        <div class="text-center">
+          <div class="alert alert-warning d-inline-block m-4 p-4" role="alert">
+            <div class="d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+              <div>
+                If you forget to add your username to your SSH command, or you use the incorrect key file path, you will receive a <code>Permission Denied</code> error. <span class="fw-bold">Look out for these pitfalls when using SSH.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <figure class="figure mx-auto">
+            <img src="/img/connected-to-vm.png" class='img-fluid border border-4 rounded border-info-subtle' alt="Displaying the VM's system information.">
+            <figcaption class="figure-caption mt-3"><span>Displaying the VM's system information. Note how <code>ssh</code> uses the computer's name if a username isn't supplied.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+      </div>
+
+      <div class="border border-4 border-info rounded px-4 py-5 my-5 text-center">
+        <!-- Star Icon -->
+        <svg class="bi bi-star-fill text-warning mb-4" width="50" height="50" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+        </svg>
+    
+        <!-- Hero Content -->
+        <h1 class="display-1 fw-bold text-body-emphasis mb-4">CONGRATULATIONS!</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">You have successfully created and deployed a VM on the cloud!</p>
+          <p class="p-4 mb-4">You can now host a website, examine system logs or run applications.</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <button type="button" class="btn btn-secondary btn-lg px-4">
+              <a href="/html/build-and-run-an-azure-web-app.html" class="text-decoration-none text-white">Build and Run an Application</a>
+          </button>
+          </div>
+          <button type="button" class="btn btn-primary btn-lg px-4">
+            <a href="/html/create-a-web-server.html" class="text-decoration-none text-white">Create a Web Server</a>
+        </button>
+          <div>
+            <button type="button" class="btn btn-secondary btn-lg px-4">
+              <a href="/html/automate-your-server-watch.html" class="text-decoration-none text-white">Automate Your Server Watch</a>
+          </button>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+    <!-- Toast/Popup -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="themeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header bg-warning text-dark">
+              <svg class="bi bi-info-circle-fill me-2" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+              </svg>
+              <strong class="me-auto">Notice</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+              The light mode feature is in development.
+          </div>
+      </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4" id="pageFooter" aria-label="Footer">
+      <p class="col-md-4 mb-0 text-body-secondary">©2025 Cloud Analyst Go</p>
+      <a href="#" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="footer-logo">
+        <img src="/android-chrome-transparent.png" alt="Website logo" width="96" height="96">
+      </a>
+      <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/services.html" class="nav-link px-2 text-body-secondary">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="/projects.html" class="nav-link px-2 text-body-secondary">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="/faqs.html" class="nav-link px-2 text-body-secondary">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-2 text-body-secondary" data-bs-toggle="modal" data-bs-target="#contactModal" href="#" role="button">Contact</a>
+
+        </li>
+      </ul>
+    </footer>
+
+    <!--Toasts-->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <!-- Theme Toast (working) -->
+      <div id="themeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-warning text-dark">
+          <i class="bi bi-gear-fill me-2"></i>
+          <strong class="me-auto">Theme Settings</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Theme switching is currently disabled. This feature will be available soon!
+        </div>
+      </div>
+      
+      <!--Projects Toast (not working) -->
+      <div id="projectsToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-primary text-dark">
+          <i class="bi bi-kanban me-2"></i>
+          <strong class="me-auto">Projects Portfolio</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          My projects portfolio is currently under development. Check back soon to see my latest work!
+        </div>
+      </div>
+
+      <!--Services Toast (not working) -->
+      <div id="servicesToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-info text-dark">
+          <i class="bi bi-person-exclamation me-2"></i>
+          <strong class="me-auto">Services Tab</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          My "collection of services" page is currently under development. Check back soon!
+        </div>
+      </div>
+
+      <!-- Success Toast (add to your toast container) -->
+      <div id="contactSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <strong class="me-auto">Message Sent</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Thanks for reaching out! I'll get back to you as soon as possible.
+        </div>
+      </div>
+
+      <!--Subscribe Toast-->
+      <div id="subscriptionSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <strong class="me-auto">Subscription Successful</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Thanks for subscribing! You'll start receiving updates soon.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <!-- Modal Body with Form -->
+          <div class="modal-body">
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your name" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <select class="form-select" id="subject" required>
+                  <option value="" selected disabled>Please select a topic</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="services">Services Information</option>
+                  <option value="collaboration">Collaboration Opportunity</option>
+                  <option value="support">Technical Support</option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" placeholder="How can I help you?" required></textarea>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Modal Footer with Buttons -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="contactForm" class="btn btn-primary">
+              <i class="bi bi-send me-1"></i>Send Message
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>  
+</html>

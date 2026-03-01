@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Server Shutdown Prevention - IT Guide</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Prism for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-bg: #f8f9fa;
+            --code-bg: #2d2d2d;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .alert-insight {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .key-point {
+            background-color: #fff3cd;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .success-box {
+            background-color: #d4edda;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .error-box {
+            background-color: #f8d7da;
+            border-left: 4px solid var(--danger-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .section-header {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .icon-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .icon-list li {
+            padding: 8px 0;
+        }
+        
+        .solution-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            transform: translateY(-2px);
+        }
+        
+        pre {
+            margin: 0;
+        }
+        
+        .timeline-item {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+            margin-left: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .badge-custom {
+            font-weight: normal;
+            padding: 6px 12px;
+        }
+
+        .red-text {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+
+        .step-highlight {
+            background-color: #ffe6e6;
+            border: 1px solid #ffcccc;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-server"></i> IT Knowledge Base
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#problem">Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solution">Solution</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prevention">Prevention</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">The Case of the Disappearing Server: Stopping Accidental Shutdowns</h1>
+                    <p class="lead mb-4">How one accidentally clicked "Shutdown" button turned into an enterprise-wide Group Policy solution for member server protection</p>
+                    <div class="d-flex gap-3">
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-clock"></i> 8 min read
+                        </span>
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-tag"></i> Group Policy
+                        </span>
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-shield-check"></i> Member Servers
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="alert alert-primary d-flex align-items-start" role="alert">
+                    <i class="bi bi-info-circle-fill me-3 mt-1"></i>
+                    <div>
+                        <h5 class="alert-heading">Executive Summary</h5>
+                        Picture this: You're in the middle of applying critical updates to a production member server when a user accidentally clicks "Shutdown" instead of "Sign out." Minutes of work lost, services interrupted, and users frustrated. This guide shows how we implemented a Group Policy solution to prevent accidental shutdowns on member servers while maintaining admin access.
+                    </div>
+                </div>
+
+                <!-- The Problem Section -->
+                <section id="problem" class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-exclamation-triangle text-warning"></i> The Wednesday Afternoon That Changed Everything
+                    </h2>
+                    
+                    <p>It was 2:30 PM on a Wednesday. I was deep in the middle of applying Windows updates to our file server - you know, the kind that requires multiple reboots and careful monitoring. The server was at that critical stage where it had installed updates but hadn't completed the configuration yet.</p>
+                    
+                    <p>Then Sarah from Accounting called: <em>"The file server seems to be down. I can't access my shared folders."</em></p>
+
+                    <div class="error-box">
+                        <p class="mb-1"><i class="bi bi-x-circle"></i> <strong>What happened:</strong> A user had RDP'd into the server to access a shared application</p>
+                        <p class="mb-1"><i class="bi bi-x-circle"></i> <strong>The mistake:</strong> Instead of clicking "Sign out," they clicked "Shutdown"</p>
+                        <p class="mb-0"><i class="bi bi-x-circle"></i> <strong>The result:</strong> Server shut down mid-update, requiring manual intervention and rollback</p>
+                    </div>
+
+                    <div class="key-point">
+                        <strong>The Realization:</strong> This wasn't the first time. We'd had similar incidents where users accidentally shut down servers while trying to log off. It was happening across multiple member servers, not just this one.
+                    </div>
+
+                    <!-- Symptoms Card -->
+                    <div class="card shadow-sm my-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-search"></i> Incident Analysis</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-danger">The Problems:</h6>
+                                    <ul class="icon-list">
+                                        <li><i class="bi bi-x-circle text-danger"></i> Users accidentally shutting down servers</li>
+                                        <li><i class="bi bi-x-circle text-danger"></i> Interrupted maintenance windows</li>
+                                        <li><i class="bi bi-x-circle text-danger"></i> Service disruptions</li>
+                                        <li><i class="bi bi-x-circle text-danger"></i> Multiple member servers affected</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-success">What We Needed:</h6>
+                                    <ul class="icon-list">
+                                        <li><i class="bi bi-check-circle text-success"></i> Prevent user access to shutdown</li>
+                                        <li><i class="bi bi-check-circle text-success"></i> Maintain admin shutdown rights</li>
+                                        <li><i class="bi bi-check-circle text-success"></i> Apply to all member servers</li>
+                                        <li><i class="bi bi-check-circle text-success"></i> Centralized management via GPO</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Root Cause Section -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-lightbulb"></i> Understanding the Issue: UI Design vs. User Behavior
+                    </h2>
+                    
+                    <div class="alert-insight">
+                        <h5><i class="bi bi-exclamation-circle"></i> The Human Factor</h5>
+                        <p class="mb-0">The Windows Start menu places "Shutdown" and "Sign out" options dangerously close together. Under pressure or when distracted, users frequently click the wrong option - especially on servers where they think they're just logging off their session.</p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-warning">
+                                    <i class="bi bi-person-x"></i> User Perspective
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>"I just want to log off"</strong></p>
+                                    <ul>
+                                        <li>Focused on completing their task</li>
+                                        <li>Not thinking about server vs. workstation</li>
+                                        <li>Muscle memory from desktop usage</li>
+                                        <li>Similar button placement causes confusion</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header bg-danger text-white">
+                                    <i class="bi bi-server"></i> Server Reality
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>"This affects everyone"</strong></p>
+                                    <ul>
+                                        <li>Shared services running</li>
+                                        <li>Other users connected</li>
+                                        <li>Critical processes active</li>
+                                        <li>Potential data loss risk</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-point mt-4">
+                        <h6><i class="bi bi-lightbulb"></i> The Solution Approach:</h6>
+                        <p class="mb-0">Instead of training users to be more careful (which never works 100%), we decided to remove the temptation entirely. Hide the shutdown options from regular users while keeping them available for administrators who actually need them.</p>
+                    </div>
+                </section>
+
+                <!-- Solution Section -->
+                <section id="solution" class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-tools text-success"></i> The Group Policy Solution: Step by Step
+                    </h2>
+
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i> <strong>Important:</strong> The steps below are for <strong>member servers</strong>. The key difference from domain controllers is the target OU and some security considerations.
+                    </div>
+
+                    <div class="solution-card">
+                        <h5><i class="bi bi-1-circle"></i> Step 1: CREATE the GPO</h5>
+                        <ol>
+                            <li>Open <strong>Group Policy Management</strong> (gpmc.msc)</li>
+                            <li>In the left pane, expand your forest/domain</li>
+                            <li>Right-click on <strong>"Group Policy Objects"</strong> folder</li>
+                            <li>Select <strong>"New"</strong></li>
+                            <li>Name it: <strong>"Member Servers - Restrict Shutdown for Non-Admins"</strong></li>
+                            <li>Click OK (leave Source Starter GPO as "none")</li>
+                        </ol>
+                    </div>
+
+                    <div class="solution-card">
+                        <h5><i class="bi bi-2-circle"></i> Step 2: LINK the GPO</h5>
+                        <div class="step-highlight">
+                            <p><strong class="red-text">MEMBER SERVER DIFFERENCE:</strong> Unlike domain controllers which have their own OU, member servers are typically in custom OUs or in the default "Computers" container.</p>
+                        </div>
+                        <ol>
+                            <li>Navigate to your <strong class="red-text">"Member Servers"</strong> OU (or wherever your servers are located)</li>
+                            <li>Right-click on the OU containing your member servers</li>
+                            <li>Select <strong>"Link an Existing GPO..."</strong></li>
+                            <li>Select your newly created <strong>"Member Servers - Restrict Shutdown for Non-Admins"</strong> GPO</li>
+                            <li>Click OK</li>
+                        </ol>
+                    </div>
+
+                    <div class="solution-card">
+                        <h5><i class="bi bi-3-circle"></i> Step 3: EDIT the GPO</h5>
+                        <ol>
+                            <li>Back in the <strong>"Group Policy Objects"</strong> folder</li>
+                            <li>Right-click on <strong>"Member Servers - Restrict Shutdown for Non-Admins"</strong></li>
+                            <li>Select <strong>"Edit"</strong></li>
+                            <li>Configure the shutdown restrictions:</li>
+                        </ol>
+                        <div class="bg-light p-3 rounded mt-3">
+                            <p class="mb-1"><strong>Navigation Path:</strong></p>
+                            <div class="timeline-item">
+                                <small><strong>User Configuration</strong></small><br>
+                                <small>→ <strong>Policies</strong></small><br>
+                                <small>→ <strong>Administrative Templates</strong></small><br>
+                                <small>→ <strong>Start Menu and Taskbar</strong></small><br>
+                                <small>→ Enable <strong>"Remove and prevent access to the Shut Down, Restart, Sleep, and Hibernate commands"</strong></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <h5><i class="bi bi-4-circle"></i> Step 4: Configure Security Filtering</h5>
+                        <p>This is the crucial step that ensures only regular users are restricted, not administrators:</p>
+                        <ol>
+                            <li>Back in Group Policy Management, click on your GPO (in the Member Servers OU)</li>
+                            <li>In the right pane, look at the <strong>"Security Filtering"</strong> section</li>
+                            <li>Remove <strong>"Authenticated Users"</strong></li>
+                            <li>Click <strong>"Add"</strong> → add <strong>"Domain Users"</strong></li>
+                            <li>Click the <strong>"Delegation"</strong> tab → <strong>"Advanced"</strong></li>
+                            <li>Add <strong>"Domain Admins"</strong> with <strong>DENY</strong> "Apply group policy"</li>
+                        </ol>
+                        
+                        <div class="key-point mt-3">
+                            <strong>Why this works:</strong> Domain Users get the policy (shutdown buttons hidden), but Domain Admins are explicitly denied the policy (shutdown buttons remain visible).
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <h5><i class="bi bi-5-circle"></i> Step 5: Test and Apply</h5>
+                        <ol>
+                            <li>Force a Group Policy update on a test server:</li>
+                        </ol>
+                        <div class="code-block">
+                            <pre><code class="language-powershell">gpupdate /force</code></pre>
+                        </div>
+                        <ol start="2">
+                            <li>Have a regular domain user log out and back in</li>
+                            <li>Verify the shutdown options are hidden</li>
+                            <li>Test with an admin account - shutdown options should remain visible</li>
+                            <li>Deploy to production member servers</li>
+                        </ol>
+
+                        <div class="alert-insight mt-3">
+                            <p class="mb-0"><strong>Key Learning:</strong> The policy only takes effect after the user logs out and back in. This caught me initially when testing with currently logged-in users!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-graph-up text-success"></i> Results: Problem Solved
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-check-circle text-success" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Zero Incidents</h6>
+                                    <p class="small">No accidental shutdowns since implementation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-people text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">User Friendly</h6>
+                                    <p class="small">No user training required - transparent solution</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-gear text-warning" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Admin Access</h6>
+                                    <p class="small">Administrators retain full shutdown capabilities</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-server text-info" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">All Servers</h6>
+                                    <p class="small">Deployed across all member servers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-box">
+                        <h5><i class="bi bi-trophy"></i> Success Metrics:</h5>
+                        <ul class="mb-0">
+                            <li><strong>Incident Reduction:</strong> 100% elimination of accidental server shutdowns</li>
+                            <li><strong>Maintenance Windows:</strong> No more interrupted update processes</li>
+                            <li><strong>User Satisfaction:</strong> No complaints - users don't even notice the change</li>
+                            <li><strong>Admin Efficiency:</strong> Less time spent on recovery, more time on proactive tasks</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Lessons Learned -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-journal-bookmark"></i> Lessons Learned & Best Practices
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <i class="bi bi-lightbulb"></i> Key Insights
+                                </div>
+                                <div class="card-body">
+                                    <h6>1. Prevention > Training</h6>
+                                    <p>Technical controls are more reliable than user education for preventing accidents.</p>
+                                    
+                                    <h6>2. Security Filtering is Powerful</h6>
+                                    <p>GPO security filtering allows granular control over who gets which policies.</p>
+                                    
+                                    <h6>3. Test with Real Users</h6>
+                                    <p>Always test policies with the actual user accounts that will be affected.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <i class="bi bi-check-square"></i> Best Practices
+                                </div>
+                                <div class="card-body">
+                                    <h6>1. Staged Deployment</h6>
+                                    <p>Test on a few servers before rolling out enterprise-wide.</p>
+                                    
+                                    <h6>2. Document Everything</h6>
+                                    <p>Include the business reason, not just the technical implementation.</p>
+                                    
+                                    <h6>3. Consider Edge Cases</h6>
+                                    <p>What about service accounts? Kiosk users? Plan for exceptions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Takeaways -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-bookmark-star"></i> Key Takeaways
+                    </h2>
+                    
+                    <div class="alert-insight">
+                        <h5>For System Administrators:</h5>
+                        <ul class="mb-0">
+                            <li><strong>Technical controls beat training:</strong> Users will make mistakes - design systems that prevent them</li>
+                            <li><strong>Security filtering is powerful:</strong> Use GPO security filtering for granular policy application</li>
+                            <li><strong>Test thoroughly:</strong> Always test with actual user accounts in realistic scenarios</li>
+                            <li><strong>Plan for exceptions:</strong> Consider service accounts and emergency procedures</li>
+                            <li><strong>Document the why:</strong> Include business justification in technical documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point mt-4">
+                        <h6><i class="bi bi-lightbulb"></i> The Golden Rule:</h6>
+                        <p class="mb-0">Never implement a restriction without understanding who legitimately needs the capability and ensuring they retain access. The goal is to prevent accidents, not block legitimate administrative functions.</p>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-flag-checkered"></i> Conclusion: A Small Change, Big Impact
+                    </h2>
+                    
+                    <p>What started as a frustrating Wednesday afternoon incident became an opportunity to implement a enterprise-wide solution that prevents a common but disruptive problem. The beauty of this solution lies in its simplicity: users can't accidentally do what they shouldn't be doing, while administrators retain full control.</p>
+
+                    <div class="success-box">
+                        <p class="mb-0"><strong>The Results:</strong> Six months later, we've had zero accidental server shutdowns. Maintenance windows complete without interruption, and the help desk doesn't get calls about mysteriously offline servers. Sometimes the best solutions are the ones users never notice.</p>
+                    </div>
+
+                    <div class="text-center my-4">
+                        <p class="lead"><strong>Remember:</strong> The best policies are invisible to users but invaluable to administrators. This Group Policy solution exemplifies that principle perfectly.</p>
+                    </div>
+                </section>
+
+                <!-- Implementation Stats -->
+                <section class="content-section">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-graph-up"></i> Implementation Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-success">✅</h4>
+                                    <p class="text-muted mb-0">Problem Solved</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-info">15</h4>
+                                    <p class="text-muted mb-0">Minutes to Implement</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-warning">0</h4>
+                                    <p class="text-muted mb-0">User Complaints</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-success">100%</h4>
+                                    <p class="text-muted mb-0">Incident Reduction</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Primary Tool:</strong> Group Policy Management Console</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Key Learning:</strong> Prevention is always better than reaction</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Call to Action -->
+                <div class="text-center my-5">
+                    <div class="card bg-light">
+                        <div class="card-body py-4">
+                            <h4>Dealing with similar user-caused server issues?</h4>
+                            <p class="mb-0">Sometimes the best solutions are the simplest ones. Consider what other common user mistakes could be prevented with smart Group Policy implementation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0"><i class="bi bi-server"></i> IT Knowledge Base - Real World Scenarios</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <span class="badge bg-secondary me-2">Group Policy</span>
+                        <span class="badge bg-secondary me-2">Member Servers</span>
+                        <span class="badge bg-secondary">Prevention</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+            class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle" 
+            style="width: 50px; height: 50px; display: none;" 
+            id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism JS for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Show/hide back to top button
+        window.onscroll = function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add copy button to code blocks
+        document.querySelectorAll('.code-block').forEach(function(codeBlock) {
+            const button = document.createElement('button');
+            button.className = 'btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2';
+            button.innerHTML = '<i class="bi bi-clipboard"></i>';
+            button.style.zIndex = '10';
+            
+            button.addEventListener('click', function() {
+                const code = codeBlock.querySelector('code').innerText;
+                navigator.clipboard.writeText(code).then(function() {
+                    button.innerHTML = '<i class="bi bi-check"></i>';
+                    setTimeout(function() {
+                        button.innerHTML = '<i class="bi bi-clipboard"></i>';
+                    }, 2000);
+                });
+            });
+            
+            codeBlock.style.position = 'relative';
+            codeBlock.appendChild(button);
+        });
+    </script>
+</body>
+</html>

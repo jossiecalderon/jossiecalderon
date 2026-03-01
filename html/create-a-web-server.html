@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark">
+
+  <head>
+    <!--Universal character set-->
+    <meta charset="utf-8">
+
+    <!--Mobile viewing-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Compiled from custom.scss Sass file-->
+    <link rel="stylesheet" href="/html/styles.css">
+
+    <!--Web Page Functionality-->
+    <script src="/html/functions.js" type="module"></script>
+
+    <!--Bootstrap-->
+    <script src="/html/script.js" type="module" async></script>
+
+    <!--Input Cleansing-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.8/purify.min.js"></script>
+
+    <!--EmailJS-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!--GA4-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7PXPJBGXH1"></script>
+
+    <!--Title-->
+    <title>Cloud Analyst Go: Master Cloud Computing, Build Your Own Technology, and Secure Technological Independence</title>
+  </head>
+
+  <body>
+
+    <!--Bootstrap elements such as these will have to be updated programatically via JS.-->
+    <!--Otherwise this navbar must be copied and pasted in pages.-->
+    <header class="navbar navbar-expand-lg pb-1 mb-4 sticky-top">
+      <nav class="container-fluid" aria-label="Main navigation">
+        <div class="d-flex align-items-center">
+          <a class="navbar-brand p-0 me-0 me-lg-2" href="/">
+            <img src="../favicons/cloudanalyst-logo-106x96-blue-outline.png" alt="CloudAnalystGo">
+          </a>
+          <div class="d-flex flex-column align-items-center">
+            <h4>Cloud Analyst Go</h4>
+            <p class="mb-0">Future-Proof Your Skills</p>
+          </div>
+        </div>
+        
+        <!-- Hamburger button - correctly targeting the collapse div -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarContent" aria-controls="navbarContent" 
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- This div will collapse on small screens -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutMe">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="servicesButton">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="projectsButton">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactModal" href="#" role="button">Contact</a>
+            </li>
+          </ul>
+          
+          <!-- Theme and subscription controls -->
+          <div class="d-flex align-items-center">
+            <button class="btn btn-link nav-link m-4 d-flex align-items-center border-secondary-subtle" id="theme-select" type="button">
+              <svg class="bi bi-moon-stars theme-icon-active" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <use href="#moon-stars-fill"></use>
+              </svg>
+            </button>
+            <div class="d-inline-flex">
+              <input type="text" class="form-control" placeholder="example@domain.com" aria-label="Subscribe" id="emailSubscriptionInput">
+              <button class="btn btn-outline-success" type="submit">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <!--SVG symbols-->
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" id="theme-icons">
+        <!-- Symbol definitions -->
+        <symbol id="moon-stars-fill" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+        </symbol>
+        <symbol id="sun-fill" width="16" height="16" viewBox="0 0 16 16">
+          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+        </symbol>
+      </svg>
+    </header>
+
+    <!--To be created programatically and read this element from another file.-->
+    <main class="container-fluid col-md-8 mx-auto p-5" id="create-a-web-server-page">
+
+      <div class="p-4 p-md-5 mb-4 row rounded text-body-emphasis align-items-center bg-body-secondary">
+        <div class="col-lg-6">
+          <div class="container-fluid px-0">
+            <h1 class="display-3 border-4 border-bottom">
+              Build Your Own Free Cloud Server & Website: Nginx on Linux
+            </h1>
+          </div>
+          <div class="container-fluid px-0">
+            <p class="lead my-3 mt-5 fst-italic">
+              Create a web server on the cloud, learn basic routing and serve your website for free
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <figure class="figure">
+            <img src="/checking-nginx.gif"  class='img-fluid border border-info-subtle' alt="Checking nginx." height="440" width="600">
+            <figcaption class="figure-caption mt-3"><span>Checking nginx.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+    <div class="p-4 pb-2 mb-4 row rounded text-body-emphasis">
+      <div class="col-lg-6">
+
+        <div class="requirements border-bottom my-0 p-4 border-info-subtle">
+          <h4 class="display-5 text-center">Requirements</h4>
+          <dl class="row">
+            <dt class="col-sm-4">Skills</dt>
+            <dd class="col-sm-8">File navigation || Connect with SSH</dd>
+
+            <dt class="col-sm-3">Items</dt>
+            <dd class="col-sm-9">
+              <p>1 Azure Account (free)</p>
+              <p>1 Azure VM (free)</p>
+            </dd>
+          
+            <dt class="col-sm-3">Completed</dt>
+            <dd class="col-sm-9">
+              <p><a href="/deploy-a-vm-on-the-cloud.html">Deploy and Connect to a VM on the Cloud</a></p>
+              <p></p>
+            </dd>
+          
+            <dt class="col-sm-4">Other</dt>
+            <dd class="col-sm-8">Your VM's IP</dd>
+            <dd class="col-sm-8">Your VM's key pair</dd>
+          </dl>
+        </div>
+        <div class="container-fluid px-0 py-4 text-center align-items-center border-top border-info-subtle">
+          <h4 class="display-6 text-center">Start Point</h4>
+          <p class="lead">Your cloud's console</p>
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-link border d-flex align-items-center" id="azurePortal" type="button" aria-label="Azure Portal">
+              <a class="" href="https://portal.azure.com/#home" target="_blank"><img src="/azure-long-logo.svg" width="64" height="64"></a>
+            </button>
+            <button class="btn btn-link border d-flex align-items-center" id="awsPortal" type="button" aria-label="Azure Portal">
+              <a class="" href="https://console.aws.amazon.com/console/home" target="_blank"><img src="/aws-logo.png" width="64" height="64"></a>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1 border-end border-info-subtle">
+      </div>
+      <div class="col-lg-5 text-center px-0 hazard-diamond-container" id="hazardDiamondContainer">
+        <figure class="figure">
+          <img src="/hazard-diamond-1010.png" class="img-fluid" alt="Hazard 1010" width="250" height="250">
+          <figcaption class="figure-caption"><span>This project is rated <span class="text-success fw-bold">easy</span> on the Project Hazard scale.</span>
+            <p class="text-start"><a href="/html/project-hazard-scale.html" class="text-body-secondary">
+              (What's this?)
+            </a></p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+      
+    <div class="container-fluid steps">
+      <div class="p-1 mb-5 bg-opacity-10 border-bottom rounded-pill">
+        <h1 class="display-5 text-center walkthrough-header p-3 rounded-pill">Walkthrough</h1>
+      </div>
+
+      <h3>1. Update the system</h3>
+      
+      <div>
+        <div>
+          <p>Connect via SSH into your VM. You will need:</p>
+          <ul>
+            <li id="instructionsVMIP">Your VM's IP address</li>
+            <li>Your key pair</li>
+          </ul>
+        </div>
+        
+        <!-- Define the SVG symbol once -->
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+          <symbol id="question-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+          </symbol>
+          <symbol id="location" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+          </symbol>
+        </svg>
+        
+        <div class="alert alert-info py-2" id="findMyVMIP">
+          <div class="row">
+            <!-- Left column for icon and title -->
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+              <svg class="flex-shrink-0" width="48" height="48" fill="currentColor">
+                <use href="#location"></use>
+              </svg>
+              <h2 class="display-6 text-center mt-2">Find Your VM's IP</h2>
+            </div>
+            
+            <!-- Right column for the instructions -->
+            <div class="col-md-6">
+              <ol class="text-start mb-0">
+                <li>On the top-left corner of Home in your Azure Portal, click on the hamburger menu (☰).</li>
+                <li>Scan the list for "Virtual Machines."</li>
+                <li>Click to navigate to the page, and identify your VM.</li>
+                <li>Copy the IP of the VM.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>Find your VM's key-pair and copy its path. Open a PowerShell console on Windows (or terminal on Linux). Enter the following command:</p>
+      
+      <pre class="custom-code-block"><code>ssh -i /paste/the/path/to/your/key-pair.pem your-username@the-ip-you-copied</pre></code>
+
+      <p>You are now logged onto the VM.</p>
+      
+      <p>2. Perform a status check. Type and enter: <pre class="custom-code-block"><code>clear; hostnamectl</code></pre> Verify the output for OS yields the expected output, i.e., the OS you chose to install on the VM.</p>
+      
+      <figure><img src="/logging-into-linux.gif"  class='img-fluid border border-info-subtle' alt="Logging into Linux." height="450" width="800"><figcaption>Performing a status check.</figcaption></figure>
+
+      <p>3. Update the VM. Run the following command:</p>
+
+      <!--This can be dynamic.-->
+      <ul class="nav nav-underline" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Fedora</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ubuntu</button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"><pre class="custom-code-block"><code>sudo dnf update -y</code></pre></div>
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><pre class="custom-code-block"><code>sudo apt update -y</code></pre></div>
+      </div>
+      
+      <figure><img src="/updating-linux.png" class='img-fluid border border-info-subtle' alt="Updating Linux."><figcaption>Updating Linux on Fedora.</figcaption></figure>
+      
+      <h3>2. Install nginx</h3>
+      
+      <p>1. Now that the system's updated, install nginx (pronounced "engine-x"), a web server that delivers websites to visitors over their browsers. Afterwards, check if nginx is active, and enabled. Run the following commands:</p>
+
+        <!--This should be dynamic.-->
+        <ul class="nav nav-underline" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Fedora</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Ubuntu</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <pre class="custom-code-block"><code>
+              sudo dnf install nginx -y
+              sudo systemctl status nginx
+            </code></pre>
+          </div>
+          <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <pre class="custom-code-block"><code>
+              sudo apt install nginx -y
+              sudo systemctl status nginx
+          </code></pre>
+          </div>
+        </div>
+      
+      <p>2. Examine the output. If you see that nginx is disabled or inactive (common on Fedora), we need to start and enable nginx. (If the system is active and enabled - common on Ubuntu - skip below to <i>3. Load the website.</i>)</p>
+
+      <p>3. Run the following commands:</p>
+
+      <pre class="custom-code-block"><code>
+        sudo systemctl start nginx
+        sudo systemctl enable nginx
+        sudo systemctl status nginx
+      </pre></code>
+
+      <p>Now the output should show <code>Active: Enabled</code> and <code class="text-success">Enabled</code> (next to <code>preset:disabled</code>; this is okay). 
+        
+      <figure><img src="/enabling-nginx.gif" class='img-fluid border border-info-subtle' alt="Examining nginx status check output."><figcaption>Enabling nginx.</figcaption></figure>
+      
+      <p>This status indicates that the website is ready to load, and will boot up anytime the server boots up.</p>
+      
+      <h3>3. Load the website</h3>
+      
+      <p>1. The IP you copied when you were logging into your VM in Step 1 is the location of the website on the internet. Enter that IP into your web browser: You should see the nginx test page appear.</p>
+
+      <figure><img src="/nginx-test-page-fedora-ubuntu.png" class='img-fluid border border-info-subtle' alt="The server is functioning and ready to serve content!"><figcaption>The server is functioning and ready to serve content!</figcaption></figure>
+      
+      <h3>4. Add some content</h3>
+      
+      <p>1. Create a directory where your content will live, along with the homepage for your website. Run the following commands:</p>
+      
+      <pre class="custom-code-block"><code>
+      sudo mkdir -p /var/www/<span class="inline-code">myOnlineServerSite</span>/html
+      sudo nano /var/www/<span class="inline-code">myOnlineServerSite</span>/html/index.html
+      </pre></code>
+
+      <p>where <span class="inline-code">myOnlineServerSite</span> is the name of your site. For the name, you can choose to use the IP, <span class="inline-code">myReallyCoolSite</span> or any arbitrary name.</p>
+      
+      <p>2. For this step, you will use nano, a text editor. When nano's window pops up, copy and paste the following text followed by CTRL+S and CTRL+X (or cmd+s, then cmd+x if on a Mac):</p>
+      
+      <pre class="custom-code-block"><code>
+        &lt;!doctype html&gt;
+        &lt;html&gt;
+          &lt;head&gt;
+            &lt;title&gt;"My blank slate"&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            &lt;p&gt;"Hello from Linux!"&lt;/p&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+      </code></pre>
+
+      <p>This will save (Ctrl/cmd+S) and close (Ctrl/cmd+X) your file.</p>
+      
+      <p>The following contents always comprise an HTML file:</p>
+      
+      <ul class="list-group">
+        <li class="list-group-item">&lt;!doctype html&gt; element, promoting HTML5 functionality and compatibility</li>
+        <li class="list-group-item">One set of &lt;html&gt; opening and closing tags, containing a head and body</li>
+        <li class="list-group-item">One set of &lt;head&gt; opening and closing tags, containing a title</li>
+        <li class="list-group-item">One set of &lt;title&gt; opening and closing tags</li>
+        <li class="list-group-item">One set of &lt;body&gt; opening and closing tags</li>
+      </ul>
+      
+      <p><strong>Always adhere to HTML structure.</strong> If <code>"Hello, world!"</code> was typed as the file's only contents, the file would not have followed HTML structure and may not parse well.</p>
+      
+      <h3>5. Connect the content to your website</h3>
+      
+      <p>1. We will need to configure a server to grab our content and host it like we saw earlier. Most of the work is already done by the default configuration, but there are some areas that require a second look. Let's enter the default configuration file with <code>sudo nano /etc/nginx/nginx.conf</code>, and examine the server block:</p>
+      
+      <figure><img src="/nginx-configuration.png" class='img-fluid border border-info-subtle' alt="Studying the nginx server configuration."><figcaption>Studying the nginx server configuration.</figcaption></figure>
+
+      <p>The original configuration includes a line, <code>include /etc/nginx/conf.d/*.conf</code>. This line tells nginx to look here for our custom-configured servers, such as the one about to be configured.</p>
+      
+      <p>2. Create your own configuration file: Run the command <code>sudo nano /etc/nginx/conf.d/myOnlineServer.conf</code> where myOnlineServer can be any name you choose. Enter the following text:</p>
+      
+      <pre class="custom-code-block"><code>
+        server {
+            listen 80;
+            server_name your.vm.ip.here;
+            root /path/to/your/homepage;
+            index index.html;
+        }
+        </code></pre>
+      
+      <p>Save and close it (Ctrl/cmd+S, then Ctrl/cmd+X).</p>
+      
+      <p>3. Every time the configuration changes, nginx must be reloaded. Run the following command:</p>
+      
+      <pre class="custom-code-block"><code>sudo systemctl reload nginx</code></pre>
+      
+      <p>Alternatively, <code>sudo nginx -s reload</code> achieves the same outcome.</p>
+      
+      <p>4. Visit the IP address again. If you are running Ubuntu, you should see your homepage:</p>
+      
+      <p>If you are running Ubuntu, <span class="fw-bold d-inline-block">CONGRATULATIONS!</span> Your project is complete, and you can skip to the end of the page.</p> 
+      
+      <p>However, Fedora users will see a 403 Forbidden page. This is due to a normal security feature enabled by default in both Red Hat Enterprise Linux (RHEL) and Fedora, which is what RHEL is built on. The module, known as SELinux, was developed by the NSA and released to the open-source community in 2000. While it is a powerful technology, it's a bit restrictive here.</p>
+      
+      <p>5. Lessen access permissions on the web server. (This can be changed back later.) Run the following command:</p>
+      
+      <pre class="custom-code-block"><code>sudo setenforce Permissive</code></pre>
+      
+      <p>6. Reload the configuration. This is only necessary if the configuration (*.conf) file is changed, but doing it here and now forms a habit to think about updating the configuration upon any server change. Run the following command:</p>
+      
+      <pre class="custom-code-block"><code>sudo nginx -s reload</code></pre>
+      
+      <p>7. Visit the website.</p>
+      
+      <figure><img src="/connected.png" class='img-fluid border border-info-subtle' alt="The website is online!"><figcaption>The website is online!</figcaption></figure>
+      
+      Congratulations! You have built a web server, uploaded content and hosted it for public display on the internet!
+      (image)
+
+      <p>The full, non-interactive bash script is available on Github, both for <a href="https://github.com/CloudAnalystGo/bash-scripts/blob/main/ws-fedora.sh">Fedora 42</a>
+        and for <a href="https://github.com/CloudAnalystGo/bash-scripts/blob/main/ws-ubuntu.sh">Ubuntu 24.02.</a></p>
+      </div>
+    </main>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4" id="pageFooter" aria-label="Footer">
+      <p class="col-md-4 mb-0 text-body-secondary">©2025 Cloud Analyst Go</p>
+      <a href="#" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="footer-logo">
+        <img src="/android-chrome-transparent.png" alt="Website logo" width="96" height="96">
+      </a>
+      <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/services.html" class="nav-link px-2 text-body-secondary">Services</a>
+        </li>
+        <li class="nav-item">
+          <a href="/projects.html" class="nav-link px-2 text-body-secondary">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="/faqs.html" class="nav-link px-2 text-body-secondary">FAQs</a>
+        </li>
+        <li class="nav-item">
+          <a href="/contact.html" class="nav-link px-2 text-body-secondary">Contact</a>
+        </li>
+      </ul>
+    </footer>
+
+    <!--Toasts-->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <!-- Theme Toast (working) -->
+      <div id="themeToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-warning text-dark">
+          <i class="bi bi-gear-fill me-2"></i>
+          <strong class="me-auto">Theme Settings</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Theme switching is currently disabled. This feature will be available soon!
+        </div>
+      </div>
+      
+      <!--Projects Toast (not working) -->
+      <div id="projectsToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-info text-dark">
+          <i class="bi bi-kanban me-2"></i>
+          <strong class="me-auto">Projects Portfolio</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          My projects portfolio is currently under development. Check back soon to see my latest work!
+        </div>
+      </div>
+
+      <!--Services Toast (not working) -->
+      <div id="servicesToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-info text-dark">
+          <i class="bi bi-person-exclamation me-2"></i>
+          <strong class="me-auto">Services Tab</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          My "collection of services" page is currently under development. Check back soon!
+        </div>
+      </div>
+
+      <!-- Success Toast (add to your toast container) -->
+      <div id="contactSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <strong class="me-auto">Message Sent</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Thanks for reaching out! I'll get back to you as soon as possible.
+        </div>
+      </div>
+
+      <!--Subscribe Toast-->
+      <div id="subscriptionSuccessToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-success text-white">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <strong class="me-auto">Subscription Successful</strong>
+          <small>Just now</small>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Thanks for subscribing! You'll start receiving updates soon.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <!-- Modal Body with Form -->
+          <div class="modal-body">
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your name" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <select class="form-select" id="subject" required>
+                  <option value="" selected disabled>Please select a topic</option>
+                  <option value="general">General Inquiry</option>
+                  <option value="services">Services Information</option>
+                  <option value="collaboration">Collaboration Opportunity</option>
+                  <option value="support">Technical Support</option>
+                </select>
+              </div>
+              
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" placeholder="How can I help you?" required></textarea>
+              </div>
+            </form>
+          </div>
+          
+          <!-- Modal Footer with Buttons -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="contactForm" class="btn btn-primary">
+              <i class="bi bi-send me-1"></i>Send Message
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>  
+</html>

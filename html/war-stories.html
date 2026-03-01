@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Analyst Go - IT War Stories</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            min-height: 100vh;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #f8fafc;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stories-container {
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .stories-grid {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0 2rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: #475569 #1e293b;
+        }
+
+        .stories-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .stories-grid::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+
+        .stories-grid::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .stories-grid::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .story-card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 400px;
+            max-width: 400px;
+            flex-shrink: 0;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #06b6d4, #10b981);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .story-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            background: #334155;
+            border-color: #475569;
+        }
+
+        .story-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .story-card:nth-child(2) .story-icon {
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+        }
+
+        .story-card:nth-child(3) .story-icon {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .story-card:nth-child(4) .story-icon {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .story-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: #f8fafc;
+        }
+
+        .story-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .story-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            background: #374151;
+            color: #e5e7eb;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid #4b5563;
+        }
+
+        .story-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0ea5e9;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px rgba(14, 165, 233, 0.2);
+        }
+
+        .read-btn:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(14, 165, 233, 0.3);
+        }
+
+        .scroll-hint {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        .scroll-hint::before,
+        .scroll-hint::after {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #475569, transparent);
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            background: #334155;
+            border: 1px solid #475569;
+            color: #cbd5e1;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: #475569;
+            border-color: #64748b;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #1e293b;
+            margin-top: 4rem;
+            border-top: 1px solid #334155;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .story-card {
+                min-width: 320px;
+                max-width: 320px;
+                padding: 2rem;
+            }
+            
+            .stories-grid {
+                gap: 1.5rem;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>IT War Stories</h1>
+        <p>Real-world tales from the trenches of enterprise IT. Learn from our mistakes, celebrate our victories, and discover the lessons that shaped our expertise.</p>
+    </div>
+
+    <div class="container">
+        <div class="stories-container">
+            <div class="stories-grid" id="storiesGrid">
+                <div class="story-card">
+                    <div class="story-icon">🖥️</div>
+                    <h2 class="story-title">From Crisis to Resolution: Enterprise-Wide RDP Access Failure</h2>
+                    <p class="story-description">
+                        A Monday morning disaster unfolds when a Windows Server migration locks out every domain user from RDP access. 
+                        Discover the critical difference between domain and local group membership, and learn why explicit security boundaries 
+                        matter even in trusted environments.
+                    </p>
+                    <div class="story-tags">
+                        <span class="tag">Windows Server Migration</span>
+                        <span class="tag">RDP Access</span>
+                        <span class="tag">Group Policy</span>
+                        <span class="tag">Security</span>
+                    </div>
+                    <div class="story-stats">
+                        <span>📊 90% of domain users affected</span>
+                        <span>⏱️ 4 hours to resolution</span>
+                        <span>🔧 PowerShell + GPO fix</span>
+                    </div>
+                    <a href="/html/it-base-rdp-gpo.html" class="read-btn">
+                        Read the Story →
+                    </a>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-icon">🌙</div>
+                    <h2 class="story-title">The Friday Night Migration That Almost Went Wrong</h2>
+                    <p class="story-description">
+                        What started as a routine Domain Controller migration turned into a weekend-threatening crisis when RDP access 
+                        was completely locked out. Learn about the crucial difference between "Not Defined" and "Defined but Empty" 
+                        in Group Policy, and why backup access methods are essential.
+                    </p>
+                    <div class="story-tags">
+                        <span class="tag">Domain Controller</span>
+                        <span class="tag">Migration</span>
+                        <span class="tag">Local Security Policy</span>
+                        <span class="tag">Troubleshooting</span>
+                    </div>
+                    <div class="story-stats">
+                        <span>🎯 Mission-critical DC migration</span>
+                        <span>🆘 Complete RDP lockout</span>
+                        <span>🛠️ Third-party tool rescue</span>
+                    </div>
+                    <a href="/html/dc-migration-rdp-group-local-policy.html" class="read-btn">
+                        Read the Story →
+                    </a>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-icon">🚨</div>
+                    <h2 class="story-title">The 5:40 PM YouTube Crisis</h2>
+                    <p class="story-description">
+                        A CEO's panicked call about a hacked YouTube channel with 80,000 subscribers turns into a race against time. 
+                        Discover how understanding Google's account recovery process and quick thinking saved a critical business asset 
+                        from permanent loss, and how a security crisis became a catalyst for transformation.
+                    </p>
+                    <div class="story-tags">
+                        <span class="tag">Account Recovery</span>
+                        <span class="tag">Security Incident</span>
+                        <span class="tag">YouTube</span>
+                        <span class="tag">Crisis Management</span>
+                    </div>
+                    <div class="story-stats">
+                        <span>📺 80K subscriber channel</span>
+                        <span>⏱️ 30 minutes to recovery</span>
+                        <span>🔒 Zero data lost</span>
+                    </div>
+                    <a href="/html/youtube-hack-account-recovery-crisis-averted.html" class="read-btn">
+                        Read the Story →
+                    </a>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-icon">🔒</div>
+                    <h2 class="story-title">Locking Down the Shutdown: Securing Member Server Access</h2>
+                    <p class="story-description">
+                        When users start shutting down critical member servers from the desktop, it's time to implement proper security controls. 
+                        Learn how to restrict shutdown privileges through Group Policy and Local Security Policy, and discover the subtle 
+                        differences between various shutdown-related permissions that can make or break your server security.
+                    </p>
+                    <div class="story-tags">
+                        <span class="tag">Member Server</span>
+                        <span class="tag">Shutdown Security</span>
+                        <span class="tag">Group Policy</span>
+                        <span class="tag">Access Control</span>
+                    </div>
+                    <div class="story-stats">
+                        <span>🖥️ Member server hardening</span>
+                        <span>🔐 Restricted shutdown access</span>
+                        <span>⚙️ GPO implementation</span>
+                    </div>
+                    <a href="/html/member-server-restricting-shutdown-access.html" class="read-btn">
+                        Read the Story →
+                    </a>
+                </div>
+            </div>
+            
+            <div class="scroll-hint">← Scroll to explore more stories →</div>
+            
+            <div class="navigation-buttons">
+                <button class="nav-btn" id="prevBtn">← Previous Story</button>
+                <button class="nav-btn" id="nextBtn">Next Story →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Every experienced sysadmin has stories like these. The key is learning from them and sharing the knowledge so others can avoid the same pitfalls.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const storiesGrid = document.getElementById('storiesGrid');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const readButtons = document.querySelectorAll('.read-btn');
+            
+            // Smooth scrolling for navigation buttons
+            const cardWidth = 400 + 32; // card width + gap
+            
+            prevBtn.addEventListener('click', function() {
+                storiesGrid.scrollBy({
+                    left: -cardWidth,
+                    behavior: 'smooth'
+                });
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                storiesGrid.scrollBy({
+                    left: cardWidth,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Update button states based on scroll position
+            function updateNavButtons() {
+                const isAtStart = storiesGrid.scrollLeft <= 0;
+                const isAtEnd = storiesGrid.scrollLeft >= (storiesGrid.scrollWidth - storiesGrid.clientWidth);
+                
+                prevBtn.disabled = isAtStart;
+                nextBtn.disabled = isAtEnd;
+            }
+            
+            storiesGrid.addEventListener('scroll', updateNavButtons);
+            updateNavButtons(); // Initial state
+            
+            // Enhanced read button interactions
+            readButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Add a subtle click animation
+                    this.style.transform = 'translateX(10px) scale(0.98)';
+                    
+                    setTimeout(() => {
+                        // Reset animation and navigate
+                        this.style.transform = '';
+                        window.location.href = this.href;
+                    }, 150);
+                });
+                
+                button.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 8px 25px rgba(255, 255, 255, 0.2)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '';
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevBtn.click();
+                } else if (e.key === 'ArrowRight') {
+                    nextBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

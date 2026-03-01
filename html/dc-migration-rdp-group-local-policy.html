@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDP Access Failure After Domain Migration (Part 2) - IT Guide</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Prism for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+    <!--GA4-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7PXPJBGXH1"></script>
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-bg: #f8f9fa;
+            --code-bg: #2d2d2d;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .alert-insight {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .key-point {
+            background-color: #fff3cd;
+            border-left: 4px solid var(--warning-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .success-box {
+            background-color: #d4edda;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .error-box {
+            background-color: #f8d7da;
+            border-left: 4px solid var(--danger-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .section-header {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .icon-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .icon-list li {
+            padding: 8px 0;
+        }
+        
+        .solution-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            transform: translateY(-2px);
+        }
+        
+        pre {
+            margin: 0;
+        }
+        
+        .timeline-item {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+            margin-left: 10px;
+            padding-bottom: 20px;
+        }
+        
+        .badge-custom {
+            font-weight: normal;
+            padding: 6px 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-server"></i> IT Knowledge Base
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#problem">Problem</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solution">Solution</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prevention">Prevention</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">The Friday Night Migration That Almost Went Wrong</h1>
+                    <p class="lead mb-4">A cautionary tale of domain controller migration, RDP lockouts, and the remote access tool that saved the weekend</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-clock"></i> 8 min read
+                        </span>
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-tag"></i> Windows Server 2025
+                        </span>
+                        <span class="badge bg-light text-dark badge-custom">
+                            <i class="bi bi-shield-check"></i> RDP Security
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Executive Summary -->
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="alert alert-primary d-flex align-items-start" role="alert">
+                    <i class="bi bi-info-circle-fill me-3 mt-1"></i>
+                    <div>
+                        <h5 class="alert-heading">The Setup</h5>
+                        Friday evening. No plans. Perfect day for a domain controller migration from 2022 to 2025. What could go wrong? Everything was going smoothly until a single oversight turned into a complete RDP lockout scenario. Here's how I nearly locked my team and I out of our company infrastructure.
+                    </div>
+                </div>
+
+                <!-- The Problem Section -->
+                <section id="problem" class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-exclamation-triangle text-warning"></i> When "Simple" Becomes Complicated
+                    </h2>
+                    
+                    <p>The migration itself went perfectly. Windows Server 2022 to 2025, all domain services transferred, no errors in the event logs. But then came the moment of truth: testing RDP access for regular users.</p>
+                    
+                    <div class="error-box">
+                        <p class="mb-2"><strong>The Error Message:</strong></p>
+                        <p class="mb-0"><em>"To sign in remotely, you need the right to sign in through Remote Desktop Services. By default, members of the Administrator group have this right. If the group you're in doesn't have this right, or if the right has been removed from the Administrator's group, you need to be granted this right manually."</em></p>
+                    </div>
+
+                    <div class="key-point">
+                        <strong>The Diagnosis:</strong> Event logs told the complete story:<br>
+                        <span class="d-block mt-2">✅ Domain authentication: Working perfectly (users could log into the domain)</span>
+                        <span class="d-block">❌ Local authorization: Completely missing (server didn't recognize their RDP rights)</span>
+                        <span class="d-block">💡 The revelation: DC migrations preserve AD data, not local Windows configurations</span>
+                    </div>
+
+                    <!-- The Escalation -->
+                    <div class="card shadow-sm my-4">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0"><i class="bi bi-fire"></i> The Moment of Panic</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline-item">
+                                <h6>Step 1: The Quick Fix Attempt</h6>
+                                <p>Opened Local Security Policy, navigated to "Allow log on through Remote Desktop Services," and added a test user. <strong>Success!</strong> The user could now connect.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Step 2: The Cleanup Mistake</h6>
+                                <p>Removed the test user to keep things clean. But here's the critical error: I didn't add the proper domain groups first. The policy was no longer "Not Defined" - it was now explicitly empty.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Step 3: The Lockout</h6>
+                                <p>Computer went to sleep, RDP session disconnected. When trying to reconnect: <strong>Access Denied.</strong> Even administrator accounts were now locked out because the policy was explicitly set but empty.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- The Rescue Section -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-life-preserver"></i> The Lifeline: Third-Party Remote Access
+                    </h2>
+                    
+                    <div class="alert-insight">
+                        <h5><i class="bi bi-lightbulb"></i> The Save</h5>
+                        <p>With RDP completely locked down, the situation seemed hopeless. But there was one tool still running: a third-party remote access application that operates independently of Windows RDP services. This application uses its own authentication mechanism and doesn't rely on the "Allow log on through Remote Desktop Services" policy.</p>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-success">
+                                <div class="card-header bg-success text-white">
+                                    <i class="bi bi-shield-check"></i> Why It Worked
+                                </div>
+                                <div class="card-body">
+                                    <ul class="mb-0">
+                                        <li><strong>Independent Service:</strong> Runs as its own Windows service</li>
+                                        <li><strong>Different Authentication:</strong> Uses application-specific credentials</li>
+                                        <li><strong>Bypasses RDP Policy:</strong> Not subject to Terminal Services restrictions</li>
+                                        <li><strong>Always Available:</strong> Starts automatically with Windows</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 border-warning">
+                                <div class="card-header bg-warning">
+                                    <i class="bi bi-exclamation-triangle"></i> The Lesson
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Always have a backup access method.</strong></p>
+                                    <ul class="mb-0">
+                                        <li>Third-party remote access tools</li>
+                                        <li>Out-of-band management (iLO, iDRAC)</li>
+                                        <li>Physical console access</li>
+                                        <li>Emergency break-glass procedures</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Solution Section -->
+                <section id="solution" class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-tools text-success"></i> The Resolution: Proper Group Policy Configuration
+                    </h2>
+
+                    <div class="success-box">
+                        <h5><i class="bi bi-check-circle"></i> Immediate Fix</h5>
+                        <p>Once back in via the third-party tool, the fix was straightforward: add the Administrators group back to the "Allow log on through Remote Desktop Services" policy to restore immediate access.</p>
+                    </div>
+
+                      <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="solution-card">
+                                <h5><i class="bi bi-people"></i> The Proper Solution</h5>
+                                <p>Created a domain security group called "RDS Allow" with global scope, then configured the Default Domain Controllers Policy:</p>
+                                <div class="code-block">
+                                    <pre><code class="language-powershell"># PowerShell to verify the configuration
+Get-GPO -Name "Default Domain Controllers Policy" | Get-GPPermissions</code></pre>
+                                </div>
+                                <p><strong>Group Policy Path:</strong></p>
+                                <div class="bg-light p-3 rounded">
+                                    <small>Computer Configuration</small><br>
+                                    <small>→ Windows Settings</small><br>
+                                    <small>→ Security Settings</small><br>
+                                    <small>→ Local Policies</small><br>
+                                    <small>→ User Rights Assignment</small><br>
+                                    <small>→ Allow log on through Remote Desktop Services</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="solution-card">
+                                <h5><i class="bi bi-gear"></i> Configuration Steps</h5>
+                                <ol>
+                                    <li><strong>Create Domain Group:</strong> Create "DOMAINNAME\RDS Allow" (Global Security Group)</li>
+                                    <li><strong>Edit Default Policy:</strong> Open "Default Domain Controllers Policy" in GPMC</li>
+                                    <li><strong>Add Group to Policy:</strong> Add "DOMIANNAME\RDS Allow" directly to "Allow log on through Remote Desktop Services" setting</li>
+                                    <li><strong>Test Access:</strong> Add users to group and verify connectivity</li>
+                                    <li><strong>Document:</strong> Record the configuration for future reference</li>
+                                </ol>
+                                <div class="alert alert-success mt-3">
+                                    <small><strong>Why this approach works:</strong> The Default Domain Controllers Policy has proper precedence and automatically applies to all DCs, avoiding GPO conflicts.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lessons Learned -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-journal-bookmark"></i> What We Learned
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-calendar-event text-primary" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Friday Migrations</h6>
+                                    <p class="small">Sometimes the risk is worth it when you have time to troubleshoot</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-shield-exclamation text-warning" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Policy States</h6>
+                                    <p class="small">"Not Defined" ≠ "Defined but Empty" - crucial distinction</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-laptop text-success" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Backup Access</h6>
+                                    <p class="small">Alternative remote access tools can be lifesavers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <div class="card text-center h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-people-fill text-info" style="font-size: 2rem;"></i>
+                                    <h6 class="mt-3">Group Strategy</h6>
+                                    <p class="small">Domain groups + GPO = scalable, manageable solution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Prevention Section -->
+                <section id="prevention" class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-shield-check text-success"></i> Prevention: Never Get Locked Out Again
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <i class="bi bi-list-check"></i> Pre-Migration Checklist
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="pre1">
+                                        <label class="form-check-label" for="pre1">
+                                            Document current RDP access configuration
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="pre2">
+                                        <label class="form-check-label" for="pre2">
+                                            Ensure alternative access methods are available
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="pre3">
+                                        <label class="form-check-label" for="pre3">
+                                            Create domain groups for RDP access
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="pre4">
+                                        <label class="form-check-label" for="pre4">
+                                            Prepare GPOs for consistent configuration
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <i class="bi bi-tools"></i> Emergency Toolkit
+                                </div>
+                                <div class="card-body">
+                                    <h6>Always Have These Ready:</h6>
+                                    <ul>
+                                        <li><strong>Third-party remote access:</strong> Independent of Windows RDP</li>
+                                        <li><strong>Out-of-band management:</strong> iLO, iDRAC, or similar</li>
+                                        <li><strong>Physical access plan:</strong> Know where the server is</li>
+                                        <li><strong>Emergency contacts:</strong> Who has physical access?</li>
+                                        <li><strong>Recovery documentation:</strong> Step-by-step procedures</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Takeaways -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-bookmark-star"></i> The Bottom Line
+                    </h2>
+                    
+                    <div class="alert-insight">
+                        <h5>For System Administrators:</h5>
+                        <ul class="mb-0">
+                            <li><strong>Test everything:</strong> Including user access, not just admin access</li>
+                            <li><strong>Understand policy states:</strong> "Not Defined" vs "Defined but Empty"</li>
+                            <li><strong>Plan for failure:</strong> Always have a backup access method</li>
+                            <li><strong>Use domain groups:</strong> Scalable and manageable through GPO</li>
+                            <li><strong>Document configurations:</strong> Future you will thank present you</li>
+                        </ul>
+                    </div>
+
+                    <div class="key-point mt-4">
+                        <h6><i class="bi bi-lightbulb"></i> Pro Tip:</h6>
+                        <p class="mb-0">The difference between "Not Defined" and "Defined but Empty" in Group Policy can be the difference between a smooth evening and a stressful weekend. When you modify a policy, always ensure you're setting it to the correct state, not just clearing it.</p>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="content-section">
+                    <h2 class="section-header">
+                        <i class="bi bi-flag-checkered"></i> Epilogue: A Friday Night Well Spent
+                    </h2>
+                    
+                    <p>What started as a routine migration turned into a valuable learning experience. The combination of understanding Windows security policies, having backup access methods, and knowing how to properly configure domain-based solutions turned a potential disaster into a successful project completion.</p>
+
+                    <div class="success-box">
+                        <p class="mb-0"><strong>The Happy Ending:</strong> By midnight, all users had proper RDP access through the new domain group, the GPO was correctly configured and documented, and the migration was complete. Sometimes the best lessons come from the problems we create for ourselves.</p>
+                    </div>
+
+                    <div class="text-center my-4">
+                        <p class="lead"><strong>Remember:</strong> Every experienced sysadmin has a story like this. The key is learning from it and sharing the knowledge so others can avoid the same pitfalls.</p>
+                    </div>
+                </section>
+
+                <!-- Incident Stats -->
+                <section class="content-section">
+                    <div class="card border-primary">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-graph-up"></i> Migration Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-success">✅</h4>
+                                    <p class="text-muted mb-0">Migration Successful</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-warning">3</h4>
+                                    <p class="text-muted mb-0">Hours of Troubleshooting</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-info">1</h4>
+                                    <p class="text-muted mb-0">Backup Tool Used</p>
+                                </div>
+                                <div class="col-md-3 col-6 mb-3">
+                                    <h4 class="text-success">GPO</h4>
+                                    <p class="text-muted mb-0">Final Solution</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Tools That Saved the Day:</strong> Third-party remote access application</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Lesson Learned:</strong> Always test with regular user accounts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Call to Action -->
+                <div class="text-center my-5">
+                    <div class="card bg-light">
+                        <div class="card-body py-4">
+                            <h4>Have you had a similar close call?</h4>
+                            <p class="mb-0">Every admin has war stories. The important thing is documenting and sharing them so the community can learn together.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0"><i class="bi bi-server"></i> IT Knowledge Base - Real World Scenarios</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <span class="badge bg-secondary me-2">Migration</span>
+                        <span class="badge bg-secondary me-2">RDP</span>
+                        <span class="badge bg-secondary">Troubleshooting</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+            class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle" 
+            style="width: 50px; height: 50px; display: none;" 
+            id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism JS for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Show/hide back to top button
+        window.onscroll = function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add copy button to code blocks
+        document.querySelectorAll('.code-block').forEach(function(codeBlock) {
+            const button = document.createElement('button');
+            button.className = 'btn btn-sm btn-outline-light position-absolute top-0 end-0 m-2';
+            button.innerHTML = '<i class="bi bi-clipboard"></i>';
+            button.style.zIndex = '10';
+            
+            button.addEventListener('click', function() {
+                const code = codeBlock.querySelector('code').innerText;
+                navigator.clipboard.writeText(code).then(function() {
+                    button.innerHTML = '<i class="bi bi-check"></i>';
+                    setTimeout(function() {
+                        button.innerHTML = '<i class="bi bi-clipboard"></i>';
+                    }, 2000);
+                });
+            });
+            
+            codeBlock.style.position = 'relative';
+            codeBlock.appendChild(button);
+        });
+    </script>
+</body>
+</html>

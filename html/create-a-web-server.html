@@ -117,7 +117,7 @@
         </div>
         <div class="col-lg-6 text-center">
           <figure class="figure">
-            <img src="/checking-nginx.gif"  class='img-fluid border border-info-subtle' alt="Checking nginx." height="440" width="600">
+            <img src="/img/checking-nginx.gif"  class='img-fluid border border-info-subtle' alt="Checking nginx." height="440" width="600">
             <figcaption class="figure-caption mt-3"><span>Checking nginx.</span>
             </figcaption>
           </figure>
@@ -155,10 +155,10 @@
           <p class="lead">Your cloud's console</p>
           <div class="d-flex justify-content-around">
             <button class="btn btn-link border d-flex align-items-center" id="azurePortal" type="button" aria-label="Azure Portal">
-              <a class="" href="https://portal.azure.com/#home" target="_blank"><img src="/azure-long-logo.svg" width="64" height="64"></a>
+              <a class="" href="https://portal.azure.com/#home" target="_blank"><img src="/img/azure-long-logo.svg" width="64" height="64"></a>
             </button>
             <button class="btn btn-link border d-flex align-items-center" id="awsPortal" type="button" aria-label="Azure Portal">
-              <a class="" href="https://console.aws.amazon.com/console/home" target="_blank"><img src="/aws-logo.png" width="64" height="64"></a>
+              <a class="" href="https://console.aws.amazon.com/console/home" target="_blank"><img src="/img/aws-logo.png" width="64" height="64"></a>
             </button>
           </div>
         </div>
@@ -235,7 +235,7 @@
       
       <p>2. Perform a status check. Type and enter: <pre class="custom-code-block"><code>clear; hostnamectl</code></pre> Verify the output for OS yields the expected output, i.e., the OS you chose to install on the VM.</p>
       
-      <figure><img src="/logging-into-linux.gif"  class='img-fluid border border-info-subtle' alt="Logging into Linux." height="450" width="800"><figcaption>Performing a status check.</figcaption></figure>
+      <figure><img src="/img/logging-into-linux.gif"  class='img-fluid border border-info-subtle' alt="Logging into Linux." height="450" width="800"><figcaption>Performing a status check.</figcaption></figure>
 
       <p>3. Update the VM. Run the following command:</p>
 
@@ -253,7 +253,7 @@
         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><pre class="custom-code-block"><code>sudo apt update -y</code></pre></div>
       </div>
       
-      <figure><img src="/updating-linux.png" class='img-fluid border border-info-subtle' alt="Updating Linux."><figcaption>Updating Linux on Fedora.</figcaption></figure>
+      <figure><img src="/img/updating-linux.png" class='img-fluid border border-info-subtle' alt="Updating Linux."><figcaption>Updating Linux on Fedora.</figcaption></figure>
       
       <h3>2. Install nginx</h3>
       
@@ -295,7 +295,7 @@
 
       <p>Now the output should show <code>Active: Enabled</code> and <code class="text-success">Enabled</code> (next to <code>preset:disabled</code>; this is okay). 
         
-      <figure><img src="/enabling-nginx.gif" class='img-fluid border border-info-subtle' alt="Examining nginx status check output."><figcaption>Enabling nginx.</figcaption></figure>
+      <figure><img src="/img/enabling-nginx.gif" class='img-fluid border border-info-subtle' alt="Examining nginx status check output."><figcaption>Enabling nginx.</figcaption></figure>
       
       <p>This status indicates that the website is ready to load, and will boot up anytime the server boots up.</p>
       
@@ -303,7 +303,7 @@
       
       <p>1. The IP you copied when you were logging into your VM in Step 1 is the location of the website on the internet. Enter that IP into your web browser: You should see the nginx test page appear.</p>
 
-      <figure><img src="/nginx-test-page-fedora-ubuntu.png" class='img-fluid border border-info-subtle' alt="The server is functioning and ready to serve content!"><figcaption>The server is functioning and ready to serve content!</figcaption></figure>
+      <figure><img src="/img/nginx-test-page-fedora-ubuntu.png" class='img-fluid border border-info-subtle' alt="The server is functioning and ready to serve content!"><figcaption>The server is functioning and ready to serve content!</figcaption></figure>
       
       <h3>4. Add some content</h3>
       
@@ -348,7 +348,7 @@
       
       <p>1. We will need to configure a server to grab our content and host it like we saw earlier. Most of the work is already done by the default configuration, but there are some areas that require a second look. Let's enter the default configuration file with <code>sudo nano /etc/nginx/nginx.conf</code>, and examine the server block:</p>
       
-      <figure><img src="/nginx-configuration.png" class='img-fluid border border-info-subtle' alt="Studying the nginx server configuration."><figcaption>Studying the nginx server configuration.</figcaption></figure>
+      <figure><img src="/img/nginx-configuration.png" class='img-fluid border border-info-subtle' alt="Studying the nginx server configuration."><figcaption>Studying the nginx server configuration.</figcaption></figure>
 
       <p>The original configuration includes a line, <code>include /etc/nginx/conf.d/*.conf</code>. This line tells nginx to look here for our custom-configured servers, such as the one about to be configured.</p>
       
@@ -387,7 +387,7 @@
       
       <p>7. Visit the website.</p>
       
-      <figure><img src="/connected.png" class='img-fluid border border-info-subtle' alt="The website is online!"><figcaption>The website is online!</figcaption></figure>
+      <figure><img src="/img/connected.png" class='img-fluid border border-info-subtle' alt="The website is online!"><figcaption>The website is online!</figcaption></figure>
       
       Congratulations! You have built a web server, uploaded content and hosted it for public display on the internet!
       (image)

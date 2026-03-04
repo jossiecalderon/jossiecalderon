@@ -18,7 +18,7 @@ Personal website deployed on **Azure Static Web Apps** with a serverless visitor
 
 ## CI/CD
 Deployments are automated via **GitHub Actions**:
-- Push to `main` → deploys frontend (and API if present)
+- Push to `main` → deploys frontend
 
 ## Notes
 This project is intentionally small but production-minded: reduced attack surface (no VMs), managed TLS, and identity-based access to data.

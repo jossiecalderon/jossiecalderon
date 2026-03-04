@@ -310,9 +310,7 @@
 </head>
 <body>
 
-    <!--Bootstrap elements such as these will have to be updated programatically via JS.-->
-    <!--Otherwise this navbar must be copied and pasted in pages.-->
-    <header class="navbar navbar-expand-lg pb-1 mb-4 fixed-top">
+    <header class="navbar navbar-expand-lg pb-1 mb-4">
       <nav class="container-fluid" aria-label="Main navigation">
         <div class="d-flex align-items-center">
           <a class="navbar-brand p-0 me-0 me-lg-2" href="/">
@@ -323,57 +321,9 @@
             <p class="mb-0">Identity and Security Engineer</p>
           </div>
         </div>
-        
-        <!-- Hamburger button - correctly targeting the collapse div -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarContent" aria-controls="navbarContent" 
-                aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <!-- This div will collapse on small screens -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!--<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="https://www.jossiecalderon.com/#aboutMe">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="libraryButton" href="/html/case-studies.html">Case Studies</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="projectsButton">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="modal" data-bs-target="#contactModal" href="#" role="button">Contact</a>
-            </li>
-          </ul>-->
-          
-          <!-- Theme and subscription controls -->
-          <div class="d-flex align-items-center">
-            <button class="btn btn-link nav-link m-4 d-flex align-items-center border-secondary-subtle" id="theme-select" type="button">
-              <svg class="bi bi-moon-stars theme-icon-active" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <use href="#moon-stars-fill"></use>
-              </svg>
-            </button>
-            <div class="d-inline-flex">
-              <input type="text" class="form-control" placeholder="example@domain.com" aria-label="Subscribe" id="emailSubscriptionInput">
-              <button class="btn btn-outline-success" type="submit">Subscribe</button>
-            </div>
-          </div>
-        </div>
       </nav>
       
-      <!--SVG symbols-->
-      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" id="theme-icons">
-        <!-- Symbol definitions -->
-        <symbol id="moon-stars-fill" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
-          <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
-        </symbol>
-        <symbol id="sun-fill" width="16" height="16" viewBox="0 0 16 16">
-          <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
-        </symbol>
-      </svg>
+
     </header>
 
     <div class="hero">
@@ -493,29 +443,6 @@
     <div class="footer">
         <p>Every experienced sysadmin has stories like these. The key is learning from them and sharing the knowledge so others can avoid the same pitfalls.</p>
     </div>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4" id="pageFooter" aria-label="Footer">
-      <p class="col-md-4 mb-0 text-body-secondary">©2026 Jossie Calderon</p>
-      <a href="#" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="footer-logo">
-        <img src="/img/android-chrome-transparent.png" alt="Website logo" width="96" height="96">
-      </a>
-      <ul class="nav col-md-4 justify-content-end">
-        <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-body-secondary">Home</a>
-        </li>
-        <!--<li class="nav-item">
-          <a href="/html/case-studies.html" class="nav-link px-2 text-body-secondary">Case Studies</a>
-        </li>
-        <li class="nav-item">
-          <a href="/projects.html" class="nav-link px-2 text-body-secondary">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a href="/faqs.html" class="nav-link px-2 text-body-secondary">FAQs</a>
-        </li>-->
-        <li class="nav-item">
-          <a href="/contact.html" class="nav-link px-2 text-body-secondary">Contact</a>
-        </li>
-      </ul>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

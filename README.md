@@ -2,6 +2,9 @@
 
 Personal website deployed on **Azure Static Web Apps** with a serverless visitor counter.
 
+## Purpose
+Personal portfolio and identity security engineering sandbox. Prod-style demo of Azure SWA, serverless APIs, and CI/CD.
+
 ## Architecture
 - **Frontend:** Static HTML/CSS/JS hosted on Azure Static Web Apps with managed TLS
 - **API:** HTTP-triggered Azure Functions for visitor counter
